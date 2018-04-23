@@ -44,3 +44,40 @@ start=$(data +%s)
 end=$(data +%s)
 difference=$(( end - start )) #time<script>
 
+function fun()
+{
+    echo $1, $2
+    echo "$@"           #list all params
+    return 0
+}
+echo $?                 #last return value
+#Fork bomb
+#:(){ :|:& };:
+
+cmd_output=$(ls | cat -n)
+cmd_output=`ls | cat -n`
+
+repeat()
+{
+    while :             #true 
+    do
+        $@ && return
+    done
+}
+
+find . -maxdepth 1 \( -name "*.txt" -o -name "*.cfg" \) -exec cat {} \;>out.txt #-iname ignore case
+#-type d dic, f file
+#-delete
+
+#xargs -n X         #X param in oneline
+#xargs -d X         #split by X
+#xargs -I {} cmd {}
+find . -type f -name "something" -print0 | xargs -0 rm -f
+find . -type f -name "*.c" -print0 | xargs -0 wc -l #count all .c files total lines
+
+echo 12345 | tr '1-5' '54321'
+#-d '[set1]'    delete in [set1]
+#-s ''          compress
+#-c             complementary set
+
+sort out.txt | uniq     # -c count  #-d repeat line
