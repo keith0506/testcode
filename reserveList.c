@@ -14,8 +14,7 @@ node* reverse(node* list)
 		ppre->next = p->next;
 		p->next = head;
 		head = p;
-		p = ppre;
-		p = p->next;
+		p = ppre->next;
 	}
 	return head;
 }
