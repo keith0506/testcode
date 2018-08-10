@@ -68,7 +68,3 @@ void TimerRing::clear() {
         _ring[i].clear();
     }
 }
-
-int main() {
-    return 0;
-}

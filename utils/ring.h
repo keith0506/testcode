@@ -1,10 +1,6 @@
 #include <set>
 #include <vector>
-#define MAX_RING_SIZE 256
-#define FIRST_ROUND   0                                                 // seconds
-#define SECOND_ROUND  MAX_RING_SIZE                                     // minutes
-#define THIRD_ROUND   MAX_RING_SIZE * MAX_RING_SIZE                     // hours
-#define FORTH_ROUND   MAX_RING_SIZE * MAX_RING_SIZE * MAX_RING_SIZE     // days
+
 
 using namespace std;
 typedef set<int> ESet;
@@ -24,10 +20,10 @@ public:
     ~TimerRing();
     void reset();
     bool add_element(int ring_pos, int timer_id);
-    bool del_element(int ring_pos, int timer_id);
+    bool del_element(int pos, int timer_id);
     bool cycle(int &scale, IRingEvent* handler);
-    int  get_pos() const     { return _pos; };
-    void set_pos(int pos)    { _pos = pos; };
+    int get_pos() const { return _pos; };
+    int set_pos(int pos) { _pos = pos; };
     int  get_ring_id() const { return _ring_id;};
     void set_ring_id(int id) { _ring_id = id; };
     
@@ -37,13 +33,3 @@ private:
     int _pos;
     RingVec _ring; // element is set
 };
-int get_ring_pos (int timeout) {
-    if (timeout <= 0)
-        return -1;
-    if (timeout / FORTH_ROUND)
-        return timeout / FORTH_ROUND;
-    if (timeout / THIRD_ROUND)
-        return timeout / THIRD_ROUND;
-    if (timeout / SECOND_ROUND)
-        return timeout / THIRD_ROUND;
-}
