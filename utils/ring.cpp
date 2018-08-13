@@ -30,7 +30,7 @@ bool TimerRing::cycle(int &scale, IRingEvent* handler) {
 	if(handler == NULL)
 		return false; // meaningless if no handler
     
-	bool ret = false;
+	bool ret = false; // false if ring not go to end
 	int new_pos = scale + _pos;
 	if(new_pos >= MAX_RING_SIZE) {
 		ret = true;
@@ -59,6 +59,7 @@ bool TimerRing::cycle(int &scale, IRingEvent* handler) {
 			handler->on_event(_ring_id, *tid);
 		}
 		_ring[_pos].clear();
+		// remove triggerred timer_id
 	}
 
 	return ret;

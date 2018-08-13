@@ -1,6 +1,6 @@
 #include <set>
 #include <vector>
-
+#define MAX_RING_SIZE 4
 
 using namespace std;
 typedef set<int> ESet;
